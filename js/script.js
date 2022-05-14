@@ -17,8 +17,6 @@ const computerPlay = () => {
   }
 }
 
-const computerSelection = computerPlay();
-
 // PLAYER SELECTION
 const playerPrompt = () => {
   // Take player's input and make it lowercase
@@ -35,35 +33,59 @@ const playerPrompt = () => {
   }
 };
 
-const playerSelection = playerPrompt();
-
 // PLAYING A GAME
-const playRound = (playerSelection, computerSelection) => {
+const playRound = (playerPrompt, computerPlay) => {
+  let result;
+  let computerSelection = computerPlay();
+  let playerSelection = playerPrompt();
+
   if (playerSelection === 'Rock') {
     if (computerSelection === 'Paper') {
-      return 'You lose! Paper beats Rock';
+      result = 'You lose! Paper beats Rock';
     } else if (computerSelection === 'Scissors') {
-      return 'You won! Rock beats scissors';
+      result = 'You won! Rock beats scissors';
     } else {
-      return "It's a draw";
+      result = "It's a draw";
     }
   } else if (playerSelection === 'Paper') {
     if (computerSelection === 'Scissors') {
-      return 'You lose! Scissors beats Paper';
+      result = 'You lose! Scissors beats Paper';
     } else if (computerSelection === 'Rock') {
-      return 'You won! Paper beats Rock';
+      result = 'You won! Paper beats Rock';
     } else {
-      return "It's a draw";
+      result = "It's a draw";
     }
   } else if (playerSelection === 'Scissors') {
     if (computerSelection === 'Rock') {
-      return 'You lose! Rock beats Scissors';
+      result = 'You lose! Rock beats Scissors';
     } else if (computerSelection === 'Paper') {
-      return 'You won! Scissors beats Paper';
+      result = 'You won! Scissors beats Paper';
     } else {
-      return "It's a draw";
+      result = "It's a draw";
     }
   }
+
+  console.log(result);
+  return result;
 };
 
-let result = playRound(playerSelection, computerSelection);
+// playRound(playerPrompt, computerPlay);
+
+// PLAYING 5 ROUNDS
+
+let playerTotal = 0;
+let computerTotal = 0;
+
+for (let i = 0; i < 5; i++) {
+  let gameResult = playRound(playerPrompt, computerPlay);
+
+  if (gameResult.includes('You won')) {
+    playerTotal++;
+    console.log('One point to humans');
+  } else if (gameResult.includes('You lose')) {
+    compTotal++;
+    console.log('One point to machines');
+  }
+}
+
+console.log(`Player: ${playerTotal} - Computer: ${computerTotal}`);
